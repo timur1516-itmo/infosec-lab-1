@@ -8,7 +8,7 @@
 
 ## Стек
 
-- Java 21 и Spring Boot 3;
+- Java 21 и Spring Boot 4;
 - Spring Web — HTTP/JSON API;
 - Spring Data JPA и SQLite — хранение данных и параметризованные SQL-запросы;
 - Spring Security — только явные правила доступа и подключение JWT-фильтра;
@@ -193,7 +193,8 @@ mvn dependency-check:check
 
 OWASP Dependency-Check использует базу NVD. Для стабильной и быстрой работы CI рекомендуется
 добавить секрет репозитория `NVD_API_KEY`. Pipeline всё равно запускается без него, но первичная
-загрузка базы может быть медленной или ограничиваться NVD.
+загрузка базы может быть медленной или ограничиваться NVD. В CI база кешируется по дням, поэтому
+последующие запуски загружают только обновления.
 
 GitHub Actions автоматически запускает тесты и обе security-проверки при `push` и
 `pull_request`. HTML/JSON-отчёт Dependency-Check и XML-отчёт SpotBugs сохраняются в artifact

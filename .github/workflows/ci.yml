@@ -11,14 +11,14 @@ permissions:
 jobs:
   test-and-scan:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Set up Java 21 with Maven cache
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v6
         with:
           distribution: temurin
           java-version: "21"
@@ -30,6 +30,19 @@ jobs:
       - name: SAST - SpotBugs
         run: mvn --batch-mode --no-transfer-progress spotbugs:check
 
+      - name: Generate Dependency-Check cache key
+        id: dependency-check-cache-key
+        shell: bash
+        run: echo "date=$(date -u +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Dependency-Check vulnerability database
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/dependency-check
+          key: dependency-check-${{ runner.os }}-${{ steps.dependency-check-cache-key.outputs.date }}
+          restore-keys: |
+            dependency-check-${{ runner.os }}-
+
       - name: SCA - OWASP Dependency-Check
         env:
           NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
@@ -39,7 +52,7 @@ jobs:
 
       - name: Upload security reports
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: security-reports
           path: |
