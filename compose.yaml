@@ -1,0 +1,30 @@
+name: itmo-secure-api
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: itmo-secure-rest-api:local
+    ports:
+      - "${APP_PORT:-8080}:8080"
+    environment:
+      APP_JWT_SECRET: "${APP_JWT_SECRET:?Set APP_JWT_SECRET in the local .env file}"
+      APP_JWT_TTL: "${APP_JWT_TTL:-PT15M}"
+      APP_BOOTSTRAP_USERNAME: "${APP_BOOTSTRAP_USERNAME:-admin}"
+      APP_BOOTSTRAP_PASSWORD: "${APP_BOOTSTRAP_PASSWORD:?Set APP_BOOTSTRAP_PASSWORD in the local .env file}"
+      APP_DB_URL: jdbc:sqlite:/data/secure-api.db
+    volumes:
+      - api-data:/data
+    init: true
+    read_only: true
+    tmpfs:
+      - /tmp
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+
+volumes:
+  api-data:

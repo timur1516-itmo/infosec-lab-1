@@ -1,0 +1,14 @@
+.git
+.github
+.idea
+.vscode
+.m2-cache
+target
+report/screenshots
+.env
+*.db
+*.sqlite
+Dockerfile*
+compose*.yml
+compose*.yaml
+README.md

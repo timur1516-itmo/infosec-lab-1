@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    url: ${APP_DB_URL:jdbc:sqlite:secure-api.db}
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+
+server:
+  error:
+    include-message: never
+    include-stacktrace: never
+
+app:
+  jwt:
+    secret: ${APP_JWT_SECRET:}
+    ttl: ${APP_JWT_TTL:PT15M}
+  bootstrap:
+    username: ${APP_BOOTSTRAP_USERNAME:}
+    password: ${APP_BOOTSTRAP_PASSWORD:}
