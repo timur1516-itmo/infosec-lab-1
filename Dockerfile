@@ -10,7 +10,7 @@ RUN --mount=type=cache,target=/root/.m2 \
 
 COPY src ./src
 RUN --mount=type=cache,target=/root/.m2 \
-    mvn --batch-mode --no-transfer-progress clean package -DskipTests
+    mvn --batch-mode --no-transfer-progress clean package
 
 # sqlite-jdbc cannot discover a native library from a second nested JAR in every
 # Spring Boot launcher/runtime combination. Extract exactly one Linux library and

@@ -1,12 +1,12 @@
 package ru.itmo.secureapi.config;
 
-import ru.itmo.secureapi.security.PasswordService;
-import ru.itmo.secureapi.user.UserAccount;
-import ru.itmo.secureapi.user.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
+import ru.itmo.secureapi.model.UserAccount;
+import ru.itmo.secureapi.repository.UserRepository;
+import ru.itmo.secureapi.service.PasswordService;
 
 @Component
 public class BootstrapAdmin implements ApplicationRunner {

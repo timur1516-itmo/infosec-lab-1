@@ -1,4 +1,4 @@
-package ru.itmo.secureapi.error;
+package ru.itmo.secureapi.middleware;
 
 import java.time.Instant;
 import java.util.LinkedHashMap;

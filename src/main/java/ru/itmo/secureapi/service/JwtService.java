@@ -1,4 +1,4 @@
-package ru.itmo.secureapi.security;
+package ru.itmo.secureapi.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

@@ -2,7 +2,6 @@ package ru.itmo.secureapi.config;
 
 import java.time.Instant;
 import java.util.Map;
-import ru.itmo.secureapi.security.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;

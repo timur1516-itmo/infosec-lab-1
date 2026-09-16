@@ -8,5 +8,3 @@ target/
 .env
 .DS_Store
 dependency-check-data/
-report/screenshots/*.png
-!report/screenshots/.gitkeep

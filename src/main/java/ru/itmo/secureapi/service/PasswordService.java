@@ -1,4 +1,4 @@
-package ru.itmo.secureapi.security;
+package ru.itmo.secureapi.service;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

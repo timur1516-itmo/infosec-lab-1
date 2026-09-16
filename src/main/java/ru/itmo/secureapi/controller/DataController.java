@@ -1,4 +1,4 @@
-package ru.itmo.secureapi.data;
+package ru.itmo.secureapi.controller;
 
 import jakarta.validation.Valid;
 import java.security.Principal;
@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.itmo.secureapi.dto.CreateDataRequest;
+import ru.itmo.secureapi.dto.DataResponse;
+import ru.itmo.secureapi.service.DataService;
 
 @RestController
 @RequestMapping("/api/data")

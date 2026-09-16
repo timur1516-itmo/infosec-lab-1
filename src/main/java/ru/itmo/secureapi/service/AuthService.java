@@ -1,11 +1,11 @@
-package ru.itmo.secureapi.auth;
+package ru.itmo.secureapi.service;
 
-import ru.itmo.secureapi.security.JwtService;
-import ru.itmo.secureapi.security.PasswordService;
-import ru.itmo.secureapi.user.UserAccount;
-import ru.itmo.secureapi.user.UserRepository;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.stereotype.Service;
+import ru.itmo.secureapi.dto.LoginRequest;
+import ru.itmo.secureapi.dto.LoginResponse;
+import ru.itmo.secureapi.model.UserAccount;
+import ru.itmo.secureapi.repository.UserRepository;
 
 @Service
 public class AuthService {

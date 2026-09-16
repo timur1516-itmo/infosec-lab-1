@@ -1,6 +1,7 @@
-package ru.itmo.secureapi.data;
+package ru.itmo.secureapi.dto;
 
 import java.time.Instant;
+import ru.itmo.secureapi.model.DataItem;
 
 public record DataResponse(
         Long id,
@@ -9,7 +10,7 @@ public record DataResponse(
         String owner,
         Instant createdAt) {
 
-    static DataResponse from(DataItem item) {
+    public static DataResponse from(DataItem item) {
         return new DataResponse(
                 item.getId(),
                 item.getTitle(),

@@ -1,4 +1,4 @@
-package ru.itmo.secureapi.security;
+package ru.itmo.secureapi.utils;
 
 import org.owasp.html.HtmlPolicyBuilder;
 import org.owasp.html.PolicyFactory;

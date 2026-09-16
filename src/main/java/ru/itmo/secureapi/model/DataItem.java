@@ -1,4 +1,4 @@
-package ru.itmo.secureapi.data;
+package ru.itmo.secureapi.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

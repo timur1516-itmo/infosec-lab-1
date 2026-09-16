@@ -1,4 +1,4 @@
-package ru.itmo.secureapi.auth;
+package ru.itmo.secureapi.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
