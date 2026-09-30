@@ -1,0 +1,62 @@
+name: CI and security checks
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up Java 21 with Maven cache
+        uses: actions/setup-java@v6
+        with:
+          distribution: temurin
+          java-version: "21"
+          cache: maven
+
+      - name: Build application
+        run: mvn --batch-mode --no-transfer-progress package
+
+      - name: SAST - SpotBugs
+        run: mvn --batch-mode --no-transfer-progress spotbugs:check
+
+      - name: Generate Dependency-Check cache key
+        id: dependency-check-cache-key
+        shell: bash
+        run: echo "date=$(date -u +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+
+      - name: Cache Dependency-Check vulnerability database
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/dependency-check
+          key: dependency-check-${{ runner.os }}-${{ steps.dependency-check-cache-key.outputs.date }}
+          restore-keys: |
+            dependency-check-${{ runner.os }}-
+
+      - name: SCA - OWASP Dependency-Check
+        env:
+          NVD_API_KEY: ${{ secrets.NVD_API_KEY }}
+        run: >-
+          mvn --batch-mode --no-transfer-progress dependency-check:check
+          -DnvdApiKeyEnvironmentVariable=NVD_API_KEY
+
+      - name: Upload security reports
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: security-reports
+          path: |
+            target/spotbugsXml.xml
+            target/dependency-check-report.html
+            target/dependency-check-report.json
+          if-no-files-found: warn

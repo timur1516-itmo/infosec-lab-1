@@ -1,0 +1,15 @@
+package ru.itmo.secureapi.utils;
+
+import org.owasp.html.HtmlPolicyBuilder;
+import org.owasp.html.PolicyFactory;
+import org.springframework.stereotype.Component;
+
+@Component
+public class PlainTextSanitizer {
+
+    private final PolicyFactory plainTextPolicy = new HtmlPolicyBuilder().toFactory();
+
+    public String sanitize(String untrustedText) {
+        return plainTextPolicy.sanitize(untrustedText).strip();
+    }
+}
